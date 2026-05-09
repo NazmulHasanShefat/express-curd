@@ -6,7 +6,7 @@ const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 dotenv.config();
 const dns = require('dns');
 
-const { connectdb, getUsersCollection } = require('./db/dbConnection.js');
+const { connectdb, getUsersCollection, getCollection } = require('./db/dbConnection.js');
 const e = require('express');
 
 dns.setServers(["1.1.1.1","8.8.8.8"]);
@@ -27,7 +27,7 @@ connectdb()
     });
 
 app.get("/users", async(req, res)=>{
-    const usersCollection = await getUsersCollection();
+    const usersCollection = await getCollection("users");
     const cursor = await usersCollection.find();
     const users = await cursor.toArray();
     res.send({data: users})

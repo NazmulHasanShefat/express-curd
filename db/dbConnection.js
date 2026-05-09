@@ -26,4 +26,10 @@ const getUsersCollection = async () => {
     const database = await connectdb();
     return database.collection("users"); 
 };
-module.exports = { connectdb, getUsersCollection };
+
+const getCollection = async(collectionName)=>{
+    const databse = await connectdb();
+    return databse.collection(collectionName)
+}
+
+module.exports = { connectdb, getUsersCollection, getCollection };
